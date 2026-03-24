@@ -1,61 +1,21 @@
+import { authOptions } from "@/lib/auth";
 import { query } from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
-export async function GET() {
-  const session = await getServerSession();
-
+export async function DELETE(
+  req: Request,
+  { params }: { params: Promise<{ id: string }> },
+) {
+  const { id } = await params;
+  const session = await getServerSession(authOptions);
   if (!session?.user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const userId = session?.user?.id;
-
-  try {
-    const result = await query(
-      "SELECT * FROM items WHERE user_id = $1 ORDER BY target_date ASC",
-      [userId],
-    );
-    return NextResponse.json(result.rows);
-  } catch (error) {
-    return NextResponse.json({ error: "Database error" }, { status: 500 });
-  }
-}
-
-export async function POST(req: Request) {
-  const session = await getServerSession();
-  if (!session?.user)
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-
-  try {
-    const { description, targetDate } = await req.json();
-    const userId = session?.user?.id;
-
-    const result = await query(
-      "INSERT INTO items (description, target_date, user_id) VALUES ($1, $2, $3) RETURNING *",
-      [description, targetDate, userId],
-    );
-
-    return NextResponse.json(result.rows[0]);
-  } catch (error) {
-    return NextResponse.json(
-      { error: "Failed to create item" },
-      { status: 500 },
-    );
-  }
-}
-
-export async function DELETE(
-  req: Request,
-  { params }: { params: { id: string } },
-) {
-  const session = await getServerSession();
-  if (!session?.user)
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-
   try {
     await query("DELETE FROM items WHERE id = $1 AND user_id = $2", [
-      params.id,
+      id,
       session.user.id,
     ]);
     return NextResponse.json({ message: "Deleted" });
@@ -66,9 +26,10 @@ export async function DELETE(
 
 export async function PUT(
   req: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const session = await getServerSession();
+  const { id } = await params;
+  const session = await getServerSession(authOptions);
   if (!session?.user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -76,7 +37,7 @@ export async function PUT(
   try {
     const { description, targetDate } = await req.json();
     const userId = session.user.id;
-    const itemId = params.id;
+    const itemId = id;
 
     // Ενημέρωση στη βάση δεδομένων
     const result = await query(

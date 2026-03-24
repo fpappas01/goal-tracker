@@ -2,7 +2,6 @@
 import Form from "@/components/forms/form";
 import CountdownTimer from "@/components/others/countdown";
 import { Plus, Pencil, Trash2, Loader2 } from "lucide-react";
-import { format } from "node:path/win32";
 import { useState, useEffect } from "react";
 
 type Item = {
@@ -27,15 +26,31 @@ export default function GoalsPage() {
     const fetchGoals = async () => {
       try {
         const res = await fetch("/api/goals");
+
+        // Αν το status δεν είναι 200-299 (π.χ. είναι 401 Unauthorized)
+        if (!res.ok) {
+          const errorData = await res.json();
+          console.error("Server error:", errorData.error);
+          setItems([]); // Θέτουμε άδεια λίστα για να μη σκάσει το UI
+          return;
+        }
+
         const data = await res.json();
-        console.log("data", data);
-        const formatted = data.map((d: Item) => ({
-          id: d.id,
-          description: d.description,
-          targetDate: new Date(d.targetDate),
-        }));
-        console.log("formatteddata", formatted);
-        setItems(formatted);
+
+        // Σιγουρευόμαστε ότι το data είναι όντως Array
+        if (Array.isArray(data)) {
+          const formatted = data.map((d: any) => ({
+            id: d.id,
+            description: d.description,
+            // ΠΡΟΣΟΧΗ: Αν η Postgres επιστρέφει target_date (με underscore),
+            // χρησιμοποίησε d.target_date εδώ
+            targetDate: new Date(d.target_date || d.targetDate),
+          }));
+          setItems(formatted);
+        } else {
+          console.error("Data received is not an array:", data);
+          setItems([]);
+        }
       } catch (error) {
         console.error("Fetch error:", error);
       } finally {
