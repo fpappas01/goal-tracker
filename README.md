@@ -1,6 +1,6 @@
 # GoalTicker
 
-**GoalTicker** is a full-stack goal-tracking application built with **Next.js+**. It empowers users to define their ambitions and visualize their progress through a modern, clock-style countdown interface.
+**GoalTicker** is a full-stack goal-tracking application built with **Next.js**. It empowers users to define their ambitions and visualize their progress through a modern, clock-style countdown interface.
 
 ---
 
