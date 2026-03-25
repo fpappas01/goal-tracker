@@ -1,6 +1,6 @@
 # GoalTicker
 
-**GoalTicker** is a high-performance, full-stack goal-tracking application built with **Next.js 14+**. It empowers users to define their ambitions and visualize their progress through a sleek, modern, clock-style countdown interface.
+**GoalTicker** is a full-stack goal-tracking application built with **Next.js+**. It empowers users to define their ambitions and visualize their progress through a modern, clock-style countdown interface.
 
 ---
 
@@ -33,11 +33,11 @@ Follow these instructions to set up the project locally.
 
 ### 1. Prerequisites
 * **Node.js** (v18.x or higher)
-* **PostgreSQL** (Local instance or a cloud provider like Neon/Supabase)
+* **PostgreSQL** (Local instance or a cloud provider)
 
 ### 2. Installation
 Clone the repository and install the dependencies:
 ```bash
-git clone [https://github.com/your-username/goalticker.git](https://github.com/your-username/goalticker.git)
+git clone this repo
 cd goalticker
-npm install
+pnpm install
