@@ -23,7 +23,7 @@ export default function LoginPage() {
     });
 
     if (res?.error) {
-      setError("Λάθος email ή κωδικός πρόσβασης");
+      setError("Wrong email or password.");
     } else {
       router.push("/goals"); // Ανακατεύθυνση στη σελίδα των στόχων
       router.refresh();

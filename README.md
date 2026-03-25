@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GoalTicker
+
+**GoalTicker** is a high-performance, full-stack goal-tracking application built with **Next.js 14+**. It empowers users to define their ambitions and visualize their progress through a sleek, modern, clock-style countdown interface.
+
+---
+
+## Features
+
+* **Custom Authentication**: Fully integrated **NextAuth.js** using the Credentials Provider. Secure sign-up and login flows with encrypted password handling.
+* **Persistent Database**: Powered by **PostgreSQL**. All user profiles and goal data are stored reliably in a relational structure.
+* **Full CRUD Operations**: A seamless interface to **Create, Read, Update, and Delete** goals with instant UI feedback.
+* **Clock-Style Countdown**: A custom circular "clock" component for every goal that dynamically calculates and displays the time remaining until the target date.
+* **Route Protection (Middleware)**: Global authentication guard using Next.js Middleware. Unauthorized access to `/goals` or private API routes triggers an automatic redirect to the login page.
+* **Type Safety**: End-to-end **TypeScript** support, including module augmentation for NextAuth to ensure the `userId` is globally accessible and type-safe across the app.
+* **Modern UI/UX**: A dark-themed, responsive dashboard built with **Tailwind CSS** and **Lucide React** icons.
+
+---
+
+## Tech Stack
+
+* **Framework**: [Next.js](https://nextjs.org/) (App Router)
+* **Authentication**: [NextAuth.js](https://next-auth.js.org/)
+* **Database**: PostgreSQL (via `pg` library)
+* **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+* **Icons**: [Lucide React](https://lucide.dev/)
+* **Language**: TypeScript
+
+---
 
 ## Getting Started
 
-First, run the development server:
+Follow these instructions to set up the project locally.
 
+### 1. Prerequisites
+* **Node.js** (v18.x or higher)
+* **PostgreSQL** (Local instance or a cloud provider like Neon/Supabase)
+
+### 2. Installation
+Clone the repository and install the dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+git clone [https://github.com/your-username/goalticker.git](https://github.com/your-username/goalticker.git)
+cd goalticker
+npm install
