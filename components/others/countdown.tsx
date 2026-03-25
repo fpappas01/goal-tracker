@@ -23,10 +23,8 @@ export default function CountdownTimer({ targetDate }: { targetDate: Date }) {
       setTimeLeft(`${days}d ${hours}h ${minutes}m ${seconds}s`);
     };
 
-    // Αρχικός υπολογισμός
     calculateTime();
 
-    // Update κάθε 1 δευτερόλεπτο
     const timer = setInterval(calculateTime, 1000);
 
     return () => clearInterval(timer);

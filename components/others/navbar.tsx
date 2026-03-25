@@ -21,7 +21,6 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-gray-800 bg-[#0f0f0f] backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
         <Link
           href="/"
           className="flex items-center gap-2 font-bold text-xl text-blue-500"
@@ -30,12 +29,10 @@ export default function Navbar() {
           <span>GoalTicker</span>
         </Link>
 
-        {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-6">
           <NavContent session={session} />
         </div>
 
-        {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center">
           <button
             type="button"
@@ -47,7 +44,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu - Απλό και σίγουρο */}
       <div
         className={`md:hidden ${isOpen ? "block" : "hidden"} bg-[#0f0f0f] border-t border-gray-800`}
       >

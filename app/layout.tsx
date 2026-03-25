@@ -26,13 +26,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full">
-      {/* Οι μεταβλητές των fonts και το antialiased μπαίνουν στο body */}
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-[#0f0f0f] text-white`}
       >
         <AuthProvider>
           <Navbar />
-          {/* Χρησιμοποιούμε main για καλύτερο SEO και δομή */}
           <main className="grow">{children}</main>
         </AuthProvider>
       </body>

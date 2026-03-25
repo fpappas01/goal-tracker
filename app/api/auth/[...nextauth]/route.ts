@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import { authOptions } from "@/lib/auth"; // Εισαγωγή από το lib
+import { authOptions } from "@/lib/auth";
 
 const handler = NextAuth(authOptions);
 

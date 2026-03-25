@@ -20,7 +20,7 @@ export default function Form({
     const description = formData.get("description") as string;
     const date = formData.get("date") as string;
 
-    if (!description || !date) return; // Απλό validation
+    if (!description || !date) return;
 
     if (initialData?.id) {
       onUpdate(initialData.id, description, date);
@@ -40,7 +40,6 @@ export default function Form({
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Description */}
           <div>
             <label className="block text-sm mb-2 text-gray-400">
               Description
@@ -55,7 +54,6 @@ export default function Form({
             />
           </div>
 
-          {/* Date & Time Picker */}
           <div>
             <label className="block text-sm mb-2 text-gray-400">
               Target Date & Time
@@ -63,14 +61,13 @@ export default function Form({
             <input
               name="date"
               min={now}
-              type="datetime-local" // Επιτρέπει και επιλογή ώρας/λεπτών
+              type="datetime-local"
               required
               className="w-full p-3 rounded-lg bg-[#0f0f0f] border border-gray-700 focus:outline-none focus:border-blue-500 transition-colors"
               defaultValue={initialData?.timeLeft}
             />
           </div>
 
-          {/* Actions */}
           <div className="flex justify-end gap-3 pt-4">
             <button
               type="button"

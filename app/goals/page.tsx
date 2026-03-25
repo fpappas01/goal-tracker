@@ -21,29 +21,25 @@ export default function GoalsPage() {
     timeLeft: string;
   }>();
 
-  // 1. Φόρτωση δεδομένων από το API
   useEffect(() => {
     const fetchGoals = async () => {
       try {
         const res = await fetch("/api/goals");
 
-        // Αν το status δεν είναι 200-299 (π.χ. είναι 401 Unauthorized)
         if (!res.ok) {
           const errorData = await res.json();
           console.error("Server error:", errorData.error);
-          setItems([]); // Θέτουμε άδεια λίστα για να μη σκάσει το UI
+          setItems([]);
           return;
         }
 
         const data = await res.json();
 
-        // Σιγουρευόμαστε ότι το data είναι όντως Array
         if (Array.isArray(data)) {
           const formatted = data.map((d: any) => ({
             id: d.id,
             description: d.description,
-            // ΠΡΟΣΟΧΗ: Αν η Postgres επιστρέφει target_date (με underscore),
-            // χρησιμοποίησε d.target_date εδώ
+
             targetDate: new Date(d.target_date || d.targetDate),
           }));
           setItems(formatted);
@@ -60,7 +56,6 @@ export default function GoalsPage() {
     fetchGoals();
   }, []);
 
-  // 2. Διαγραφή μέσω API
   async function handleDelete(id: string) {
     const res = await fetch(`/api/goals/${id}`, { method: "DELETE" });
     if (res.ok) {
@@ -68,7 +63,6 @@ export default function GoalsPage() {
     }
   }
 
-  // 3. Δημιουργία μέσω API
   async function onSubmit(description: string, dateStr: string) {
     const res = await fetch("/api/goals", {
       method: "POST",
@@ -86,7 +80,6 @@ export default function GoalsPage() {
     }
   }
 
-  // 4. Update μέσω API (Προαιρετικά αν έχεις φτιάξει το PATCH route)
   async function onUpdate(id: string, description: string, dateStr: string) {
     try {
       const res = await fetch(`/api/goals/${id}`, {
@@ -98,7 +91,6 @@ export default function GoalsPage() {
       if (res.ok) {
         const updatedItem = await res.json();
 
-        // Ενημερώνουμε το state των items
         setItems((prevItems) =>
           prevItems.map((item) =>
             item.id === id
@@ -163,7 +155,6 @@ export default function GoalsPage() {
               key={item.id}
               className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center p-6 rounded-2xl bg-[#161616] border border-gray-800 hover:border-gray-700 transition"
             >
-              {/* Αριστερά: Περιγραφή */}
               <div className="mb-4 md:mb-0">
                 <p className="text-xl font-semibold text-gray-100">
                   {item.description}
@@ -173,19 +164,17 @@ export default function GoalsPage() {
                 </p>
               </div>
 
-              {/* Κέντρο: Το Κυκλικό Ρολόι */}
               <div className="flex justify-center">
                 <div className="relative flex items-center justify-center w-32 h-32 rounded-full border-2 border-blue-500/30 bg-blue-500/5 shadow-[0_0_20px_rgba(59,130,246,0.1)]">
                   <div className="text-center scale-90">
                     <CountdownTimer targetDate={item.targetDate} />
                   </div>
-                  {/* Διακοσμητικά στοιχεία "ρολογιού" */}
+
                   <div className="absolute top-1 left-1/2 -translate-x-1/2 w-0.5 h-2 bg-blue-500/40 rounded-full"></div>
                   <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0.5 h-2 bg-blue-500/40 rounded-full"></div>
                 </div>
               </div>
 
-              {/* Δεξιά: Buttons */}
               <div className="flex justify-end gap-2 mt-4 md:mt-0">
                 <button
                   onClick={() => {

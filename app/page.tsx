@@ -4,11 +4,8 @@ import { ArrowRight, Clock, Zap } from "lucide-react";
 
 export default function LandingPage() {
   return (
-    /* 1. Added flex and flex-col to ensure the container can distribute space */
     <div className="min-h-screen bg-[#0f0f0f] text-white flex flex-col">
-      {/* 2. Wrap the top content in a div that grows (flex-grow) */}
       <main className="grow">
-        {/* Hero Section */}
         <header className="relative pt-20 pb-16 px-6 text-center overflow-hidden">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-blue-600/10 blur-[120px] rounded-full -z-10"></div>
 
@@ -32,7 +29,6 @@ export default function LandingPage() {
           </div>
         </header>
 
-        {/* Features Section - 3. Changed grid to flex with justify-center */}
         <section className="max-w-6xl mx-auto px-6 py-20 flex flex-wrap justify-center gap-8">
           <FeatureCard
             icon={<Clock className="text-blue-500" size={32} />}
@@ -48,7 +44,6 @@ export default function LandingPage() {
         </section>
       </main>
 
-      {/* Footer */}
       <footer className="border-t border-gray-900 py-10 text-center text-gray-500 text-sm">
         <p>© 2026 GoalTicker. Built for high achievers.</p>
       </footer>
@@ -66,7 +61,6 @@ function FeatureCard({
   description: string;
 }) {
   return (
-    /* Added a max-width so cards don't stretch too wide when flexed */
     <div className="p-8 rounded-2xl bg-[#141414] border border-gray-800 hover:border-blue-500/50 transition-colors max-w-sm w-full">
       <div className="mb-4">{icon}</div>
       <h3 className="text-xl font-bold mb-2">{title}</h3>

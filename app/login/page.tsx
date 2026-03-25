@@ -15,17 +15,16 @@ export default function LoginPage() {
     e.preventDefault();
     setError("");
 
-    // Καλούμε το NextAuth Credentials login
     const res = await signIn("credentials", {
       email,
       password,
-      redirect: false, // Θέλουμε να χειριστούμε εμείς το αποτέλεσμα
+      redirect: false,
     });
 
     if (res?.error) {
       setError("Wrong email or password.");
     } else {
-      router.push("/goals"); // Ανακατεύθυνση στη σελίδα των στόχων
+      router.push("/goals");
       router.refresh();
     }
   };
